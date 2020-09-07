@@ -1,7 +1,6 @@
 package com.codeus.gadsleaderboard;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class LearnerListAdapter extends RecyclerView.Adapter<LearnerListAdapter.ViewHolder> {
+public class GadsListAdapter extends RecyclerView.Adapter<GadsListAdapter.ViewHolder> {
 
     private List<GadsModel> gadsModels;
     private Context context;
     private FragmentType fragmentType;
 
-    public LearnerListAdapter(Context context, List<GadsModel> learners, FragmentType fragmentType) {
+    public GadsListAdapter(Context context, List<GadsModel> learners, FragmentType fragmentType) {
         this.gadsModels = learners;
         this.context = context;
         this.fragmentType = fragmentType;
@@ -28,7 +27,7 @@ public class LearnerListAdapter extends RecyclerView.Adapter<LearnerListAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(this.context).inflate(R.layout.learner_row, parent, false);
+        View view = LayoutInflater.from(this.context).inflate(R.layout.gads_row, parent, false);
         return new ViewHolder(view);
     }
 

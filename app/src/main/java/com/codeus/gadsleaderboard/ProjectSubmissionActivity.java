@@ -17,4 +17,9 @@ public class ProjectSubmissionActivity extends AppCompatActivity {
     {
         finish();
     }
+
+    public void submitProject(View view)
+    {
+
+    }
 }

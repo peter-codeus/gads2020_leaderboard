@@ -1,30 +1,16 @@
 package com.codeus.gadsleaderboard;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -60,34 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-//        fetchLearnersAndSkillIQ();
-    }
-
-    public void fetchLearnersAndSkillIQ()
-    {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(GadsApi.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        GadsApi gadsApi = retrofit.create(GadsApi.class);
-
-        Call<List<GadsModel>> topLearnersCall = gadsApi.getTopSkillIQ();
-
-        topLearnersCall.enqueue(new Callback<List<GadsModel>>() {
-            @Override
-            public void onResponse(Call<List<GadsModel>> call, Response<List<GadsModel>> response) {
-                if(response.isSuccessful())
-                {
-                    Log.i("LEARNER", new Gson().toJson(response.body()));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<GadsModel>> call, Throwable t) {
-                Log.i("LEARNER", "Request to server failed");
-            }
-        });
-
     }
 
     public void dialogDisplay()
@@ -109,5 +67,4 @@ public class MainActivity extends AppCompatActivity {
     {
         startActivity(new Intent(this, ProjectSubmissionActivity.class));
     }
-
 }
