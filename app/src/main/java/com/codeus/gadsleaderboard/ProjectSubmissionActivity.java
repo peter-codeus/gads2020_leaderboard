@@ -49,6 +49,14 @@ public class ProjectSubmissionActivity extends AppCompatActivity {
         finish();
     }
 
+    public void clearForm()
+    {
+        firstNameEditText.setText("");
+        lastNameEditText.setText("");
+        emailEditText.setText("");
+        projectLinkEditText.setText("");
+    }
+
     public void displayConfirmationDialog(View view)
     {
         submissionDialog = new Dialog(this);
@@ -108,7 +116,10 @@ public class ProjectSubmissionActivity extends AppCompatActivity {
                 if(progressDialog.isShowing())
                     progressDialog.dismiss();
                 if(response.isSuccessful())
+                {
+                    clearForm();
                     displaySubmissionStatusDialog(true);
+                }
                 else
                     displaySubmissionStatusDialog(false);
                 Log.i("SUBMISSION", new Gson().toJson(response.body()));
