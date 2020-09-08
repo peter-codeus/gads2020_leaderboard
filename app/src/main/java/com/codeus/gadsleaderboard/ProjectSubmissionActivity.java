@@ -3,6 +3,7 @@ package com.codeus.gadsleaderboard;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,7 @@ public class ProjectSubmissionActivity extends AppCompatActivity {
 
     EditText firstNameEditText, lastNameEditText, emailEditText, projectLinkEditText;
     Dialog submissionDialog;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class ProjectSubmissionActivity extends AppCompatActivity {
         lastNameEditText = findViewById(R.id.lastname_edit_text);
         emailEditText = findViewById(R.id.email_address_edit_text);
         projectLinkEditText = findViewById(R.id.github_link_edit_text);
+        progressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
     }
 
     public void navigateBack(View view)
@@ -51,9 +55,9 @@ public class ProjectSubmissionActivity extends AppCompatActivity {
         View dialogView = getLayoutInflater().inflate(R.layout.confirmation_dialog_layout, null);
         Button yesBtn = dialogView.findViewById(R.id.confirm_dialog_yes_btn);
         ImageView closeBtn = dialogView.findViewById(R.id.close_confirm_dialog_btn);
-        closeBtn.setOnClickListener(v -> { submissionDialog.hide(); });
+        closeBtn.setOnClickListener(v -> { submissionDialog.dismiss(); });
         yesBtn.setOnClickListener(v -> {
-            submissionDialog.hide();
+            submissionDialog.dismiss();
             submitProjectRequest();
         });
 
@@ -94,10 +98,15 @@ public class ProjectSubmissionActivity extends AppCompatActivity {
 
         Call<Void> dataCall = gadsApi.submitProject(email, firstName, lastName, githubLink);
 
+        progressDialog.setMessage("Submitting Project ...");
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         dataCall.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                submissionDialog.hide();
+                if(progressDialog.isShowing())
+                    progressDialog.dismiss();
                 if(response.isSuccessful())
                     displaySubmissionStatusDialog(true);
                 else
@@ -107,7 +116,8 @@ public class ProjectSubmissionActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call call, Throwable t) {
-                submissionDialog.hide();
+                if(progressDialog.isShowing())
+                    progressDialog.dismiss();
                 displaySubmissionStatusDialog(false);
                 Log.i("SUBMISSION", new Gson().toJson(t));
             }

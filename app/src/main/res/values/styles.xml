@@ -25,4 +25,8 @@
 <!--        <item name="android:background">@drawable/gads_icon</item>-->
 
     </style>
+
+    <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@android:color/holo_orange_dark</item>
+    </style>
 </resources>
