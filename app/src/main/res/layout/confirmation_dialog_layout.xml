@@ -8,10 +8,15 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="147dp"
-        android:layout_height="47dp"
+        android:id="@+id/confirm_dialog_yes_btn"
+        android:layout_width="145dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="72dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/confirmation_dialog_background_btn"
         android:text="Yes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,10 +33,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/close_confirm_dialog_btn" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/close_confirm_dialog_btn"
         android:layout_width="91dp"
         android:layout_height="55dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,5 +44,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_cancel_grey" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="262dp"
+        android:layout_height="27dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirm_dialog_yes_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
